@@ -10,8 +10,10 @@ int draggingCard = 0;
 
 void setup(){
   size(1800, 850); 
+
   stateMachine = FSM.INITIAL;
-  
+
+
   textSize(20);
   stroke(255);
   noFill();
@@ -26,38 +28,14 @@ void setup(){
 }
 
 
-void draw() {  
+void draw() { 
+  
+  
   switch (stateMachine) {
     
     // MENU DE L'APPLICATION
     case INITIAL:
-      background(51);
-      fill(255);
-      textAlign(LEFT);
-      text("INITIAL", 25,25);
-
-      stroke(255);
-      noFill();
-      // 1ère ligne
-      rect(50,50,350,200,5);
-      text("Scénario 1 : Consulter des informations diverses",55,55,345,195);
-      rect(500,50,350,200,5);
-      text("Scénario 2 : Interagir avec des supports physique types cartes à jouer",505,55,345,195);
-      rect(950,50,350,200,5);
-      text("Scénario 3 : Synchronisation avec l'agenda de l'utilisateur",955,55,345,195);
-      rect(1400,50,350,200,5);
-      text("Scénario 4 : Commander l'interface à la voix",1405,55,345,195);
-  
-      // 2nd ligne
-      rect(50,300,350,200,5);
-      text("Scénario 5 : Enregistrer son activité depuis son smartphone via un QR Code",55,305,345,195);
-      rect(500,300,350,200,5);
-      text("Scénario 6 : Transfert de données vers différent support",505,305,345,195);
-      rect(950,300,350,200,5);
-      text("Scénario 7 : Reprendre son activité avec un enregistrement de QR Code",955,305,345,195);
-      rect(1400,300,350,200,5);
-      text("Scénario 8 : Échanger des messages avec les voisins/collègues",1405,305,345,195);
-      
+      drawMain();
       break;
     case PAUSE:
       background(51);
@@ -65,11 +43,8 @@ void draw() {
       fill(255);
       textAlign(LEFT);
       text("PAUSE", 25,25);
-      
-      noFill();
-      rect(50,50,350,100,5);
-      text("Revenir au menu initial",65,65,335,85);
-      
+      drawRect(50,50,350,100,"Revenir au menu initial");
+ 
       break;
       
     case SCENARIO1:
@@ -132,8 +107,8 @@ void draw() {
       
       break;
     case SCENARIO5:
-      background(255,0,0);
-      text("SCENARIO 5", 25,25);
+      
+      drawScenario5();
       
       break;
     case SCENARIO6:
@@ -142,9 +117,7 @@ void draw() {
       
       break;
     case SCENARIO7:
-      background(255,0,0);
-      text("SCENARIO 7", 25,25);
-      
+      drawScenario7();
       break;
     case SCENARIO8:
       background(255,0,0);
@@ -157,41 +130,122 @@ void draw() {
 }
 
 void keyPressed(){
-  if (key == ESC && stateMachine != FSM.PAUSE && stateMachine != FSM.INITIAL) {
+  
+   switch (stateMachine) {
+    
+    // keyPressedSceneXX
+    // on nomme comme ca chaque fonction pour chaque scénario
+    // comme ca il peut executer que le code la page sur laquelle il se trouve
+    case INITIAL:
+    break;
+    case PAUSE:
+    break;
+    case SCENARIO1: 
+      break;
+    case SCENARIO2: 
+      break;
+    case SCENARIO3: 
+      break;
+     case SCENARIO4:
+      break;
+    case SCENARIO5:
+      break;
+    case SCENARIO6:  
+      break;
+    case SCENARIO7:  
+      break;
+    case SCENARIO8:   
+      break;
+    default:
+      break;
+   }    
+    if (key == ESC && stateMachine != FSM.PAUSE && stateMachine != FSM.INITIAL) {
     holdingStatePause = stateMachine;
     stateMachine = FSM.PAUSE;
   } else if (key == ESC && stateMachine == FSM.PAUSE) {
     stateMachine = holdingStatePause;
   }
   key = 0;
+
 }
+void keyTyped(){
+  
+  switch (stateMachine) {
+    
+    // keyTypedSceneXX
+
+    case INITIAL:
+    break;
+    case PAUSE:
+    break;
+    case SCENARIO1: 
+      break;
+    case SCENARIO2: 
+      break;
+    case SCENARIO3: 
+      break;
+     case SCENARIO4:
+      break;
+    case SCENARIO5:
+     keyTypedScene5();
+      break;
+    case SCENARIO6:  
+      break;
+    case SCENARIO7:  
+      break;
+    case SCENARIO8:   
+      break;
+    default:
+      break;
+   }    
+  
+}
+
+
 
 void mousePressed(){
   switch (stateMachine) {
     case INITIAL:
-      if (mouseX > 50 && mouseX < 400 && mouseY > 50 && mouseY < 250) {
+      if (overRect(50,50,350,200)) {
+        cursor(ARROW);
         stateMachine = FSM.SCENARIO1;
-      } else if (mouseX > 500 && mouseX < 850 && mouseY > 50 && mouseY < 250) {
+      } else if (overRect(500,50,350,200)) {
         stateMachine = FSM.SCENARIO2;
-      } else if (mouseX > 950 && mouseX < 1300 && mouseY > 50 && mouseY < 250) {
+      } else if (overRect(950,50,350,200)) {
         stateMachine = FSM.SCENARIO3;
-      } else if (mouseX > 1400 && mouseX <1750 && mouseY > 50 && mouseY < 250) {
+      } else if ((overRect(1400,50,350,200))) {
         stateMachine = FSM.SCENARIO4;
-      } else if (mouseX > 50 && mouseX < 400 && mouseY > 300 && mouseY < 500) {
+      } else if (overRect(50,300,350,200)) {
         stateMachine = FSM.SCENARIO5;
-      } else if (mouseX > 500 && mouseX < 850 && mouseY >300 && mouseY < 500) {
+      } else if (overRect(500,300,350,200)) {
         stateMachine = FSM.SCENARIO6;
-      } else if (mouseX > 950 && mouseX < 1300 && mouseY > 300 && mouseY < 500) {
+      } else if (overRect(950,300,350,200)) {
         stateMachine = FSM.SCENARIO7;
-      } else if (mouseX > 1400 && mouseX < 1750 && mouseY > 300 && mouseY < 500) {
+      } else if (overRect(1400,300,350,200)) {
         stateMachine = FSM.SCENARIO8;
       }
-      
       break;
     case PAUSE:
-      if (mouseX > 50 && mouseX < 400 && mouseY > 50 && mouseY < 250) {
+      if (overRect(50,50,350,100)) {
         stateMachine = FSM.INITIAL;
       }
+      break;
+     case SCENARIO1: 
+      break;
+    case SCENARIO2: 
+      break;
+    case SCENARIO3: 
+      break;
+     case SCENARIO4:
+      break;
+    case SCENARIO5:
+      mousePressedScene5();
+      break;
+    case SCENARIO6:  
+      break;
+    case SCENARIO7:  
+      break;
+    case SCENARIO8:   
       break;
     default:
       break;
@@ -237,6 +291,73 @@ void mouseDragged() {
   }
 }
 
+void drawMain(){
+  // fonctionn qui dessine le menu principal
+  background(51);      
+  fill(255);
+  textAlign(LEFT);
+  text("INITIAL", 25,25);
+  
+  stroke(255);
+       
+  if (
+       // 1ère ligne 
+      drawRect(50,50,350,200, "Scénario 1 : Consulter des informations diverses")&     
+      drawRect(500,50,350,200,"Scénario 2 : Interagir avec des supports physique types cartes à jouer")&     
+      drawRect(950,50,350,200, "Scénario 3 : Synchronisation avec l'agenda de l'utilisateur")&
+      drawRect(1400,50,350,200,"Scénario 4 : Commander l'interface à la voix")&
+  
+      /* 2nd ligne*/
+      
+      drawRect(50,300,350,200,"Scénario 5 : Enregistrer son activité depuis son smartphone via un QR Code")&
+      drawRect(500,300,350,200,"Scénario 6 : Transfert de données vers différent support")&
+      drawRect(950,300,350,200,"Scénario 7 : Reprendre son activité avec un enregistrement de QR Code")&
+      drawRect(1400,300,350,200,"Scénario 8 : Échanger des messages avec les voisins/collègues"
+     )){
+      // si aucun rectangle n'est survolé on met le curseur de base
+      cursor(ARROW);
+  
+  }
+      
+      
+  
+ 
+}
+
+
+
+
+
+
+// pour dessiner les rectangles du menu et tester si la souris est dessus
+boolean drawRect(int x, int y, int width, int height, String ctn){
+      boolean onRect;
+      noFill();
+      // test si la souris est dessus
+      onRect = rectHover(x, y, width, height, #9f9f9f);
+      rect(x, y, width, height, 5);
+      fill(255);
+      text(ctn,x+5, y+5, width-5, height-5);
+      return !onRect;
+}
+
+boolean rectHover(int x, int y, int width, int height, color hoverColor){
+  if(overRect(x, y, width, height)){
+    cursor(HAND);
+    fill(hoverColor);
+    return true;
+  }
+  return false;
+  
+}
+
+
+// permet de tester si la souris est dans une zone ou non
+boolean overRect(int x, int y, int width, int height)  {
+   boolean isIn = (mouseX >= x && mouseX <= x+width && 
+      mouseY >= y && mouseY <= y+height);
+  return isIn ;   
+}
 void captureEvent(Capture c) 
 {
   c.read();

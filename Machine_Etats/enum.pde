@@ -10,3 +10,29 @@ public enum FSM {
   SCENARIO7,
   SCENARIO8
 }
+
+// enumération pour le scénario 5
+public enum ETAT{
+  
+  INTRO,
+  ENRPROJET,
+  AFFIQR, 
+  END
+
+}
+
+public enum ETATSCENARIO7{
+  
+  INTRO,
+  SCANQR,
+  AFFINFO, 
+  END
+
+}
+
+public enum ENTREESELCTIONNEE{
+
+  UTILISATEUR,
+  SAUVEGARDE, 
+  NONE // quand rien est renseigné
+}
