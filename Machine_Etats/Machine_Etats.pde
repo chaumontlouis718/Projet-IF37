@@ -5,8 +5,10 @@ FSM stateMachine;
 FSM holdingStatePause;
 
 // Variable globale scénario 2
-float xCarte1,yCarte1,xCarte2,yCarte2,xCarte3,yCarte3;
-int draggingCard = 0;
+float xCarte1,yCarte1,xCarte2,yCarte2,xCarte3,yCarte3,
+      xBloc1,yBloc1,xBloc2,yBloc2,xBloc3,yBloc3,
+      xBloc1Dest,yBloc1Dest,xBloc2Dest,yBloc2Dest,xBloc3Dest,yBloc3Dest;
+int draggingCard = 0,holdingCard1=0,holdingCard2=0;
 
 void setup(){
   size(1800, 850); 
@@ -25,6 +27,20 @@ void setup(){
   yCarte2 = (height/2)+70;
   xCarte3 = width/4 + 180;
   yCarte3 = (height/2)+70;
+  
+  xBloc1Dest = 75;
+  yBloc1Dest = -(height/2);
+  xBloc2Dest = 75;
+  yBloc2Dest = -(height/2);
+  xBloc3Dest = 75;
+  yBloc3Dest = -(height/2);
+  
+  xBloc1 = xBloc1Dest;
+  yBloc1 = yBloc1Dest;
+  xBloc2 = xBloc2Dest;
+  yBloc2 = yBloc2Dest;
+  xBloc3 = xBloc3Dest;
+  yBloc3 = yBloc3Dest;
 }
 
 
@@ -94,6 +110,17 @@ void draw() {
       noStroke();
       rect((width/4)-40,(height/2)-50,80,50);
       
+      //Informations
+      xBloc1 = lerp(xBloc1,xBloc1Dest,0.15);
+      yBloc1 = lerp(yBloc1,yBloc1Dest,0.15);
+      xBloc2 = lerp(xBloc2,xBloc2Dest,0.15);
+      yBloc2 = lerp(yBloc2,yBloc2Dest,0.15);
+      xBloc3 = lerp(xBloc3,xBloc3Dest,0.15);
+      yBloc3 = lerp(yBloc3,yBloc3Dest,0.15);
+  
+      rect(xBloc1,yBloc1,(width/4)-100,(height/2)-150);
+      rect(xBloc2,yBloc2,(width/4)-100,(height/2)-150);
+      rect(xBloc3,yBloc3,(width/4)-100,(height/2)-150);
       
       break;
     case SCENARIO3:
@@ -255,12 +282,91 @@ void mousePressed(){
 void mouseReleased() {
   switch (stateMachine) {
     case SCENARIO2:
-      if (draggingCard == 1 && xCarte1 > 70 && xCarte1 < 200 && yCarte1 > height-220 && yCarte1 < height-190) {
+      if (draggingCard == 1 && xCarte1 > 70 && xCarte1 < 200 && yCarte1 > height-220 && yCarte1 < height-190 && holdingCard2 == 0) {
+        if (holdingCard1 != 0 && holdingCard1 != 1) {
+          xBloc1Dest = (width/4)+25;
+          yBloc1Dest = 75;
+          holdingCard2 = 1;
+        } else {
+          xBloc1Dest = 75;
+          yBloc1Dest = 75;
+          holdingCard1 = 1;
+        }
+      } else if (draggingCard == 2 && xCarte2 > 70 && xCarte2 < 200 && yCarte2 > height-220 && yCarte2 < height-190 && holdingCard2 == 0) {
+          if (holdingCard1 != 0 && holdingCard1 != 2) {
+            xBloc2Dest = (width/4)+25;
+            yBloc2Dest = 75;
+            holdingCard2 = 2;
+          } else {
+            xBloc2Dest = 75;
+            yBloc2Dest = 75;
+            holdingCard1 = 2;
+          }
+      } else if (draggingCard == 3 && xCarte3 > 70 && xCarte3 < 200 && yCarte3 > height-220 && yCarte3 < height-190 && holdingCard2 == 0) {
+          if (holdingCard1 != 0 && holdingCard1 != 3) {
+            xBloc3Dest = (width/4)+25;
+            yBloc3Dest = 75;
+            holdingCard2 = 3;
+          } else {
+            xBloc3Dest = 75;
+            yBloc3Dest = 75;
+            holdingCard1 = 3;
+          }
+      } else if (draggingCard != 0) {
+        if (draggingCard == 1 && holdingCard1 == 1) {
+          xBloc1Dest = 75;
+          yBloc1Dest = -(height/2);
+          holdingCard1 = 0;
+          if (holdingCard2 == 2) {
+            xBloc2Dest = 75;
+            holdingCard1 = 2;
+            holdingCard2 = 0;
+          } else if (holdingCard2 == 3) {
+            xBloc3Dest = 75;
+            holdingCard1 = 3;
+            holdingCard2 = 0;
+          }
+        } else if (draggingCard == 1 && holdingCard2 == 1) {
+          xBloc1Dest = 75;
+          yBloc1Dest = -(height/2);
+          holdingCard2 = 0;
+        } else if (draggingCard == 2 && holdingCard1 == 2) {
+          xBloc2Dest = 75;
+          yBloc2Dest = -(height/2);
+          holdingCard1 = 0;
+          if (holdingCard2 == 1) {
+            xBloc1Dest = 75;
+            holdingCard1 = 1;
+            holdingCard2 = 0;
+          } else if (holdingCard2 == 3) {
+            xBloc3Dest = 75;
+            holdingCard1 = 3;
+            holdingCard2 = 0;
+          }
+        } else if (draggingCard == 2 && holdingCard2 == 2) {
+          xBloc2Dest = 75;
+          yBloc2Dest = -(height/2);
+          holdingCard2 = 0;
+        } else if (draggingCard == 3 && holdingCard1 == 3) {
+          xBloc3Dest = 75;
+          yBloc3Dest = -(height/2);
+          holdingCard1 = 0;
+            holdingCard2 = 0;
+          if (holdingCard2 == 1) {
+            xBloc2Dest = 75;
+            holdingCard1 = 1;
+            holdingCard2 = 0;
+          } else if (holdingCard2 == 2) {
+            xBloc2Dest = 75;
+            holdingCard1 = 2;
+            holdingCard2 = 0;
+          }
+        } else if (draggingCard == 3 && holdingCard2 == 3) {
+          xBloc3Dest = 75;
+          yBloc3Dest = -(height/2);
+          holdingCard2 = 0;
+        }
         
-      } else if (draggingCard == 2 && xCarte2 > 70 && xCarte2 < 200 && yCarte2 > height-220 && yCarte2 < height-190) {
-      
-      } else if (draggingCard == 3 && xCarte3 > 70 && xCarte3 < 200 && yCarte3 > height-220 && yCarte3 < height-190) {
-      
       }
       draggingCard = 0;
       break;
