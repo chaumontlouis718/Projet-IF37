@@ -14,12 +14,11 @@ void setup(){
   size(1800, 850); 
 
   stateMachine = FSM.INITIAL;
-
-
+  
   textSize(20);
   stroke(255);
   noFill();
-  
+ 
   // Variable globale scénario 2
   xCarte1 = width/4;
   yCarte1 = (height/2)+70;
@@ -218,8 +217,9 @@ void keyTyped(){
       break;
     case SCENARIO6:  
       break;
-    case SCENARIO7:  
-      break;
+    case SCENARIO7:
+      keyTypedScene5();
+    break;
     case SCENARIO8:   
       break;
     default:
@@ -254,6 +254,9 @@ void mousePressed(){
       break;
     case PAUSE:
       if (overRect(50,50,350,100)) {
+      if (stateMachine == FSM.SCENARIO5 || stateMachine == FSM.SCENARIO7){
+          reinitialisation();
+        }
         stateMachine = FSM.INITIAL;
       }
       break;
@@ -270,7 +273,8 @@ void mousePressed(){
       break;
     case SCENARIO6:  
       break;
-    case SCENARIO7:  
+    case SCENARIO7:
+      mousePressedScene7();
       break;
     case SCENARIO8:   
       break;
@@ -398,7 +402,7 @@ void mouseDragged() {
 }
 
 void drawMain(){
-  // fonctionn qui dessine le menu principal
+  // fonction qui dessine le menu principal
   background(51);      
   fill(255);
   textAlign(LEFT);
@@ -466,5 +470,5 @@ boolean overRect(int x, int y, int width, int height)  {
 }
 void captureEvent(Capture c) 
 {
-  c.read();
+  cam.read();
 }

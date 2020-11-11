@@ -36,7 +36,6 @@ private void affichQRCODE(){
   }               
 }
 
-
 void QRCode(String data) {
   
   int size =400;
@@ -63,3 +62,5 @@ void QRCode(String data) {
 double randonNumber(double min, double max){
   return (Math.random()*(max + min -1)+min);  
 }
+
+// pour le scénario 7 permet de scanner un Qrcode grace à la Caméra;

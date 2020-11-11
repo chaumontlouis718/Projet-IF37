@@ -20,11 +20,12 @@ public enum ETAT{
   END
 
 }
-
+// enumération pour le scénario 7
 public enum ETATSCENARIO7{
   
   INTRO,
   SCANQR,
+  RECUPINFO,
   AFFINFO, 
   END
 

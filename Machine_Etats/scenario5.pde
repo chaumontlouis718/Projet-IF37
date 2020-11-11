@@ -38,7 +38,7 @@ void drawScenario5() {
       affichQRCODE();
     break;
     case END:
-      finScenario();
+      finScenario5();
     break;
     default:
     break;
@@ -188,7 +188,7 @@ public boolean changeCursor(){
       if(overRect(10, 80, 550,20) || overRect(10, 120,550,20) ){   
         return true;
       }
-    } 
+    }   
   }
   return false;
 }
@@ -227,9 +227,8 @@ private void infoUtilisateur(){
   
 }
 
-private void finScenario(){
- 
-  
+private void finScenario5(){
+
  background(51);
  svt = "Retour menu Principale"; 
  text("Vous avez donc pu récuperer la sauvegarde grace au QRCode,\nVous pourrez donc continuer votre travail plus tard.", 300,200,640,550);
@@ -239,10 +238,13 @@ private void finScenario(){
 private void reinitialisation(){
   // on reinitialise toutes les variables globales pour pouvoir refaire le scénario depuis le début sans devoir rouvrir l'application
   etapeScenario5 = ETAT.INTRO;
+  etapeScenario7 = ETATSCENARIO7.INTRO;
   nomUtilisateur =" ";
   nomSav = " ";
   ctnQRCode ="";
   affichInfo = true;
+  affichInfo7 = true;
   affichErreur = false;
   svt = "Continuer";
+  cam.stop();
 }
