@@ -19,6 +19,12 @@ public enum ETAT{
   END
 }
 
+public enum ETATSCENARIO1 {
+  PRINCIPAL,
+  METEO,
+  DETAIL
+}
+
 // enumération pour le scénario 7
 public enum ETATSCENARIO7{
   INTRO,

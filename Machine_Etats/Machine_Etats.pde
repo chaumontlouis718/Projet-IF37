@@ -47,6 +47,8 @@ void setup(){
   yBloc2 = yBloc2Dest;
   xBloc3 = xBloc3Dest;
   yBloc3 = yBloc3Dest;
+  
+  chargerImagesScenario1();
 }
 
 
@@ -70,9 +72,7 @@ void draw() {
       break;
       
     case SCENARIO1:
-      background(255,0,0);
-      text("SCENARIO 1", 25,25);
-      
+      drawScenario1();
       break;
     case SCENARIO2:
       background(255);
@@ -276,7 +276,8 @@ void mousePressed(){
         stateMachine = FSM.INITIAL;
       }
       break;
-     case SCENARIO1: 
+     case SCENARIO1:
+     mousePressedScene1();
       break;
     case SCENARIO2: 
       break;
