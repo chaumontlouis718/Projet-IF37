@@ -9,6 +9,13 @@ float xCarte1,yCarte1,xCarte2,yCarte2,xCarte3,yCarte3,
       xBloc1,yBloc1,xBloc2,yBloc2,xBloc3,yBloc3,
       xBloc1Dest,yBloc1Dest,xBloc2Dest,yBloc2Dest,xBloc3Dest,yBloc3Dest;
 int draggingCard = 0,holdingCard1=0,holdingCard2=0;
+String messageScenario2 = "Scénario 2 : Interagir avec des supports physique types cartes à jouer \n"+
+"1.L'utilisateur choisit une carte dans un tas disposées sur la table \n"+
+"2.Il la pose sur la table à un emplacement prévu à cet effet délimité par l'interface de l'application \n"+
+"3.L'interface se met à jour avec les informations correspondantes à la carte \n"+
+"4.Lorsqu'il retire la carte, les informations disparaissent -> retour écran principal/initial \n"+
+"Alternatif : \n"+
+"4.1 L'utilisateur ajoute une seconde carte. l'écran se sépare en deux et les informations correspondantes aux cartes sont affichées simultanément. (2 cartes max)";
 
 void setup(){
   size(1800, 850); 
@@ -117,9 +124,20 @@ void draw() {
       xBloc3 = lerp(xBloc3,xBloc3Dest,0.15);
       yBloc3 = lerp(yBloc3,yBloc3Dest,0.15);
   
+      fill(255);
+      stroke(0);
       rect(xBloc1,yBloc1,(width/4)-100,(height/2)-150);
       rect(xBloc2,yBloc2,(width/4)-100,(height/2)-150);
       rect(xBloc3,yBloc3,(width/4)-100,(height/2)-150);
+      
+      fill(0);
+      textAlign(LEFT);
+      text("Stats",xBloc1+20,yBloc1+30);
+      text("Autre",xBloc2+20,yBloc2+30);
+      text("Autre2",xBloc3+20,yBloc3+30);
+      
+      // Message utilisateur
+      text(messageScenario2,(width/2)+20, 20, (width/2)-20, height-20);
       
       break;
     case SCENARIO3:
@@ -355,7 +373,6 @@ void mouseReleased() {
           xBloc3Dest = 75;
           yBloc3Dest = -(height/2);
           holdingCard1 = 0;
-            holdingCard2 = 0;
           if (holdingCard2 == 1) {
             xBloc2Dest = 75;
             holdingCard1 = 1;
@@ -372,6 +389,8 @@ void mouseReleased() {
         }
         
       }
+      
+      println(holdingCard1+" / "+holdingCard2);
       draggingCard = 0;
       break;
     default:
@@ -447,7 +466,7 @@ boolean drawRect(int x, int y, int width, int height, String ctn){
       onRect = rectHover(x, y, width, height, #9f9f9f);
       rect(x, y, width, height, 5);
       fill(255);
-      text(ctn,x+5, y+5, width-5, height-5);
+      text(ctn,x+10, y+10, width-10, height-10);
       return !onRect;
 }
 
