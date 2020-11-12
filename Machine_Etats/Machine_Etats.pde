@@ -146,9 +146,8 @@ void draw() {
       drawScenario7();
       break;
     case SCENARIO8:
-      background(255,0,0);
-      text("SCENARIO 8", 25,25);
-      
+      drawScenario8();
+
       break;
     default:
       break;
@@ -221,14 +220,13 @@ void keyTyped(){
       keyTypedScene5();
     break;
     case SCENARIO8:   
+     keyTypedScene8();
       break;
     default:
       break;
    }    
   
 }
-
-
 
 void mousePressed(){
   switch (stateMachine) {
@@ -276,7 +274,8 @@ void mousePressed(){
     case SCENARIO7:
       mousePressedScene7();
       break;
-    case SCENARIO8:   
+    case SCENARIO8:
+      mousePressedScene8();
       break;
     default:
       break;
