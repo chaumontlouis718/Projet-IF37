@@ -17,6 +17,9 @@ String messageScenario2 = "Scénario 2 : Interagir avec des supports physique ty
 "Alternatif : \n"+
 "4.1 L'utilisateur ajoute une seconde carte. l'écran se sépare en deux et les informations correspondantes aux cartes sont affichées simultanément. (2 cartes max)";
 
+public int windowWidth = 1800;
+public int windowHeight = 850;
+
 void setup(){
   size(1800, 850); 
 
@@ -49,6 +52,8 @@ void setup(){
   yBloc3 = yBloc3Dest;
   
   chargerImagesScenario1();
+
+  chargerImagesScenario8();
 }
 
 
@@ -265,6 +270,7 @@ void mousePressed(){
       } else if (overRect(950,300,350,200)) {
         stateMachine = FSM.SCENARIO7;
       } else if (overRect(1400,300,350,200)) {
+        reset8();
         stateMachine = FSM.SCENARIO8;
       }
       break;

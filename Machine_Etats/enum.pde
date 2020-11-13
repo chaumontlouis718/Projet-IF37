@@ -37,10 +37,12 @@ public enum ETATSCENARIO7{
 // enumération pour le scénario 8
 public enum ETATS_SCENARIO_8 {
   INTRO,
+  SHARE_LEFT_LOADING,
+  SHARE_LEFT_LOADED,
   END
 }
 
-public enum ENTREESELCTIONNEE{
+public enum ENTREESELCTIONNEE {
   UTILISATEUR,
   SAUVEGARDE, 
   NONE // quand rien est renseigné
