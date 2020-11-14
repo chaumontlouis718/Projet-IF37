@@ -14,100 +14,71 @@ import java.lang.Math;
 // L'utilisateur appuie sur le contact avec qui il souhaite partager ses données
 // Les données sont envoyées au destinataire au moyen de la table
 
-private ETATS_SCENARIO_8 step = ETATS_SCENARIO_8.INTRO;
+private ETATS_SCENARIO_8 step8 = ETATS_SCENARIO_8.INTRO;
 
-private int hitBoxPadding = 8;
+private int deskWidth8 = windowWidth / 2 - 100;
+private int deskHeight8 = windowHeight - 100 - 200;
 
-private int deskWidth = windowWidth / 2 - 100;
-private int deskHeight = windowHeight - 100 - 200;
+private int modalWidth8 = 300;
+private int modalHeight8 = 300;
 
-private int modalWidth = 300;
-private int modalHeight = 300;
+private boolean handCursor8 = false;
 
-private boolean handCursor = false;
+private boolean leftShared8 = false;
 
-private boolean leftShared = false;
+private boolean rightShared8 = false;
+private String rightSharedMessage8 = "Salut Antoine";
+private String rightSharedmessageText8;
 
-private boolean rightShared = false;
-private String rightSharedMessage = "Salut Antoine";
-private String rightSharedmessageText;
+private long loadingStartTime8;
 
-private long loadingStartTime;
-
-private PImage imageKeyboard;
-private PImage imageWord;
-private PImage imageShare;
-private PImage imageMessage;
-private PImage imageLoading;
+private PImage imageKeyboard8;
+private PImage imageWord8;
+private PImage imageShare8;
+private PImage imageMessage8;
+private PImage imageLoading8;
 
 void chargerImagesScenario8() {
-  imageKeyboard = loadImage("ressources/keyboard.png");
-  imageWord = loadImage("ressources/word.png");
-  imageShare = loadImage("ressources/share.png");
-  imageMessage = loadImage("ressources/message.png");
-  imageLoading = loadImage("ressources/loading.png");
+  imageKeyboard8 = loadImage("ressources/keyboard.png");
+  imageWord8 = loadImage("ressources/word.png");
+  imageShare8 = loadImage("ressources/share.png");
+  imageMessage8 = loadImage("ressources/message.png");
+  imageLoading8 = loadImage("ressources/loading.png");
 }
 
-private boolean overWithHitBoxPadding(int x, int y, int width, int height) {
-  return overRect(
-    x - hitBoxPadding,
-    y - hitBoxPadding,
-    width + 2 * hitBoxPadding,
-    height + 2 * hitBoxPadding
-  );
-}
+void setup8() {
+  step8 = ETATS_SCENARIO_8.INTRO;
 
-private void rectWithHitBoxPadding(
-  int x,
-  int y,
-  int width,
-  int height,
-  int radius
-) {
-  rect(
-    x - hitBoxPadding,
-    y - hitBoxPadding,
-    width + 2 * hitBoxPadding,
-    height + 2 * hitBoxPadding,
-    radius
-  );
+  leftShared8 = false;
 
-  return;
-}
-
-void reset8() {
-  step = ETATS_SCENARIO_8.INTRO;
-
-  leftShared = false;
-
-  rightShared = false;
-  rightSharedMessage = "Salut Antoine";
+  rightShared8 = false;
+  rightSharedMessage8 = "Salut Antoine";
 }
 
 void drawScenario8() {
-  handCursor = false;
+  handCursor8 = false;
 
-  switch (step) {
+  switch (step8) {
     case INTRO:
-      drawBackground();
+      drawBackground8();
 
       break;
 
     case SHARE_LEFT_LOADING:
       /** Fake loading timeout */
-      if (System.currentTimeMillis() - loadingStartTime > 800) {
-        step = ETATS_SCENARIO_8.SHARE_LEFT_LOADED;
+      if (System.currentTimeMillis() - loadingStartTime8 > 800) {
+        step8 = ETATS_SCENARIO_8.SHARE_LEFT_LOADED;
       }
 
-      drawBackground();
+      drawBackground8();
 
-      drawLeftModal();
+      drawLeftModal8();
 
       /** Spinner */
       image(
-        imageLoading,
-        50 + ((deskWidth) - modalWidth) / 2 + modalWidth / 2 - 32 / 2,
-        100 + ((deskHeight) - modalHeight) / 2 + modalHeight / 2 - 32 / 2,
+        imageLoading8,
+        50 + ((deskWidth8) - modalWidth8) / 2 + modalWidth8 / 2 - 32 / 2,
+        100 + ((deskHeight8) - modalHeight8) / 2 + modalHeight8 / 2 - 32 / 2,
         32,
         32
       );
@@ -115,45 +86,45 @@ void drawScenario8() {
       break;
 
     case SHARE_LEFT_LOADED:
-      drawBackground();
+      drawBackground8();
 
-      drawLeftModal();
+      drawLeftModal8();
 
       fill(0);
       if (overWithHitBoxPadding(
-        50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 150 - 18,
-        modalWidth - 16 * 2,
+        50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 150 - 18,
+        modalWidth8 - 16 * 2,
         18
       )) {
         fill(31, 109, 255);
-        handCursor = true;
+        handCursor8 = true;
       }
       textSize(18);
       textAlign(LEFT);
       text(
         "Mélanie",
-        50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 150
+        50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 150
       );
 
       break;
 
     case SHARE_RIGHT_LOADING:
       /** Fake loading timeout */
-      if (System.currentTimeMillis() - loadingStartTime > 800) {
-        step = ETATS_SCENARIO_8.SHARE_RIGHT_LOADED;
+      if (System.currentTimeMillis() - loadingStartTime8 > 800) {
+        step8 = ETATS_SCENARIO_8.SHARE_RIGHT_LOADED;
       }
 
-      drawBackground();
+      drawBackground8();
 
-      drawRightModal();
+      drawRightModal8();
 
       /** Spinner */
       image(
-        imageLoading,
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + modalWidth / 2 - 32 / 2,
-        100 + ((deskHeight) - modalHeight) / 2 + modalHeight / 2 - 32 / 2,
+        imageLoading8,
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + modalWidth8 / 2 - 32 / 2,
+        100 + ((deskHeight8) - modalHeight8) / 2 + modalHeight8 / 2 - 32 / 2,
         32,
         32
       );
@@ -161,9 +132,9 @@ void drawScenario8() {
       break;
 
     case SHARE_RIGHT_LOADED:
-      drawBackground();
+      drawBackground8();
 
-      drawRightModal();
+      drawRightModal8();
 
       fill(0);
       textSize(18);
@@ -171,60 +142,55 @@ void drawScenario8() {
 
       text(
         "Message :",
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 100
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 100
       );
 
-      rightSharedmessageText = rightSharedMessage;
+      rightSharedmessageText8 = rightSharedMessage8;
 
       if ((System.currentTimeMillis() / 500) % 2 == 0) {
-        rightSharedmessageText = rightSharedmessageText + "|";
+        rightSharedmessageText8 = rightSharedmessageText8 + "|";
       }
 
       text(
-        rightSharedmessageText,
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 120,
-        modalWidth - 16 * 2,
+        rightSharedmessageText8,
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 120,
+        modalWidth8 - 16 * 2,
         100
       );
 
       text(
         "Choisir le destinataire :",
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 240
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 240
       );
 
       fill(0);
       if (overWithHitBoxPadding(
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 270 - 18,
-        modalWidth - 16 * 2,
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 270 - 18,
+        modalWidth8 - 16 * 2,
         18
       )) {
         fill(31, 109, 255);
-        handCursor = true;
+        handCursor8 = true;
       }
       textSize(18);
       textAlign(LEFT);
       text(
         "Antoine",
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 270
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 270
       );
 
-      break;
-
-    case END:
-      background(51);
-      text("Fin du Scénario 8", 600, 530, 490, 20);
       break;
 
     default:
       break;
   }
 
-  if (handCursor) {
+  if (handCursor8) {
     cursor(HAND);
   } else {
     cursor(ARROW);
@@ -234,40 +200,40 @@ void drawScenario8() {
 }
 
 void mousePressedScene8() {
-  switch (step) {
+  switch (step8) {
     case INTRO:
-      if (!leftShared && overWithHitBoxPadding(400, 150, 32, 32)) {
-        step = ETATS_SCENARIO_8.SHARE_LEFT_LOADING;
-        loadingStartTime = System.currentTimeMillis();
+      if (!leftShared8 && overWithHitBoxPadding(400, 150, 32, 32)) {
+        step8 = ETATS_SCENARIO_8.SHARE_LEFT_LOADING;
+        loadingStartTime8 = System.currentTimeMillis();
       }
 
-      if (!rightShared && overWithHitBoxPadding(1000, 150, 32, 32)) {
-        step = ETATS_SCENARIO_8.SHARE_RIGHT_LOADING;
-        loadingStartTime = System.currentTimeMillis();
+      if (!rightShared8 && overWithHitBoxPadding(1000, 150, 32, 32)) {
+        step8 = ETATS_SCENARIO_8.SHARE_RIGHT_LOADING;
+        loadingStartTime8 = System.currentTimeMillis();
       }
       break;
 
     case SHARE_LEFT_LOADED:
       if (overWithHitBoxPadding(
-        50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 150 - 18,
-        modalWidth - 16 * 2,
+        50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 150 - 18,
+        modalWidth8 - 16 * 2,
         18
       )) {
-        step = ETATS_SCENARIO_8.INTRO;
-        leftShared = true;
+        step8 = ETATS_SCENARIO_8.INTRO;
+        leftShared8 = true;
       }
       break;
 
     case SHARE_RIGHT_LOADED:
       if (overWithHitBoxPadding(
-        windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2 + 16,
-        100 + ((deskHeight) - modalHeight) / 2 + 270 - 18,
-        modalWidth - 16 * 2,
+        windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2 + 16,
+        100 + ((deskHeight8) - modalHeight8) / 2 + 270 - 18,
+        modalWidth8 - 16 * 2,
         18
       )) {
-        step = ETATS_SCENARIO_8.INTRO;
-        rightShared = true;
+        step8 = ETATS_SCENARIO_8.INTRO;
+        rightShared8 = true;
       }
       break;
     
@@ -277,18 +243,18 @@ void mousePressedScene8() {
 }
 
 void keyTypedScene8() {
-  switch (step) {
+  switch (step8) {
     case SHARE_RIGHT_LOADED:
       if (key == BACKSPACE) {
-        if (rightSharedMessage.length() > 0) {
-          rightSharedMessage = rightSharedMessage.substring(
+        if (rightSharedMessage8.length() > 0) {
+          rightSharedMessage8 = rightSharedMessage8.substring(
             0,
-            rightSharedMessage.length() - 1
+            rightSharedMessage8.length() - 1
           );
         }
       } else {
-        if (rightSharedMessage.length() < 50) {
-          rightSharedMessage += key;
+        if (rightSharedMessage8.length() < 50) {
+          rightSharedMessage8 += key;
         }
       }
       break;
@@ -298,7 +264,7 @@ void keyTypedScene8() {
   }
 }
 
-private void drawBackground() {
+private void drawBackground8() {
   background(255);
   fill(0);
   textSize(22);
@@ -346,15 +312,15 @@ private void drawBackground() {
   // Draw desks
   fill(250, 231, 177);
 
-  rect(50, 100, deskWidth, deskHeight, 20);
+  rect(50, 100, deskWidth8, deskHeight8, 20);
 
-  rect(width / 2 + 50, 100, deskWidth, deskHeight, 20);
+  rect(width / 2 + 50, 100, deskWidth8, deskHeight8, 20);
 
   /** Left desk */
-  image(imageWord, 100, 100, 300, 420);
-  image(imageKeyboard, 100, 520, 300, 111);
+  image(imageWord8, 100, 100, 300, 420);
+  image(imageKeyboard8, 100, 520, 300, 111);
 
-  if (rightShared) {
+  if (rightShared8) {
     fill(0, 79, 227);
     textSize(18);
     textAlign(LEFT);
@@ -368,25 +334,27 @@ private void drawBackground() {
     textSize(20);
     textAlign(LEFT);
     text(
-      rightSharedMessage,
+      rightSharedMessage8,
       500,
-      240
+      240,
+      280,
+      200
     );
   }
 
   fill(135, 221, 255);
   if (
-    step == ETATS_SCENARIO_8.INTRO &&
+    step8 == ETATS_SCENARIO_8.INTRO &&
     overWithHitBoxPadding(400, 150, 32, 32)
   ) {
     fill(177, 228, 250);
-    handCursor = true;
+    handCursor8 = true;
   }
   rectWithHitBoxPadding(400, 150, 32, 32, 6);
-  image(imageShare, 400, 150, 32, 32);
+  image(imageShare8, 400, 150, 32, 32);
 
   /** Right desk */
-  if (leftShared) {
+  if (leftShared8) {
     fill(0, 79, 227);
     textSize(18);
     textAlign(CENTER);
@@ -396,33 +364,33 @@ private void drawBackground() {
       200
     );
 
-    image(imageWord, width / 2 + 500, 200, 300, 420);
+    image(imageWord8, width / 2 + 500, 200, 300, 420);
   }
 
   fill(135, 221, 255);
   if (
-    step == ETATS_SCENARIO_8.INTRO &&
+    step8 == ETATS_SCENARIO_8.INTRO &&
     overWithHitBoxPadding(1000, 150, 32, 32)
   ) {
     fill(177, 228, 250);
-    handCursor = true;
+    handCursor8 = true;
   }
   rectWithHitBoxPadding(1000, 150, 32, 32, 6);
-  image(imageMessage, 1000, 150, 32, 32);
+  image(imageMessage8, 1000, 150, 32, 32);
 }
 
-private void drawLeftModal() {
+private void drawLeftModal8() {
   /** Shadow */
   fill(0, 128);
-  rect(50, 100, deskWidth, deskHeight, 20);
+  rect(50, 100, deskWidth8, deskHeight8, 20);
 
   /** Share modal */
   fill(255);
   rect(
-    50 + ((deskWidth) - modalWidth) / 2,
-    100 + ((deskHeight) - modalHeight) / 2,
-    modalWidth,
-    modalHeight,
+    50 + ((deskWidth8) - modalWidth8) / 2,
+    100 + ((deskHeight8) - modalHeight8) / 2,
+    modalWidth8,
+    modalHeight8,
     16
   );
 
@@ -432,25 +400,25 @@ private void drawLeftModal() {
   textAlign(CENTER);
   text(
     "Partager le document",
-    50 + ((deskWidth) - modalWidth) / 2,
-    100 + ((deskHeight) - modalHeight) / 2 + 26,
-    modalWidth,
+    50 + ((deskWidth8) - modalWidth8) / 2,
+    100 + ((deskHeight8) - modalHeight8) / 2 + 26,
+    modalWidth8,
     100
   );
 }
 
-private void drawRightModal() {
+private void drawRightModal8() {
   /** Shadow */
   fill(0, 128);
-  rect(windowWidth / 2 + 50, 100, deskWidth, deskHeight, 20);
+  rect(windowWidth / 2 + 50, 100, deskWidth8, deskHeight8, 20);
 
   /** Share modal */
   fill(255);
   rect(
-    windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2,
-    100 + ((deskHeight) - modalHeight) / 2,
-    modalWidth,
-    modalHeight,
+    windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2,
+    100 + ((deskHeight8) - modalHeight8) / 2,
+    modalWidth8,
+    modalHeight8,
     16
   );
 
@@ -460,9 +428,9 @@ private void drawRightModal() {
   textAlign(CENTER);
   text(
     "Envoyer un message",
-    windowWidth / 2 + 50 + ((deskWidth) - modalWidth) / 2,
-    100 + ((deskHeight) - modalHeight) / 2 + 26,
-    modalWidth,
+    windowWidth / 2 + 50 + ((deskWidth8) - modalWidth8) / 2,
+    100 + ((deskHeight8) - modalHeight8) / 2 + 26,
+    modalWidth8,
     100
   );
 }

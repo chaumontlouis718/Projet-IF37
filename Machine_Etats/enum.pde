@@ -11,6 +11,33 @@ public enum FSM {
   SCENARIO8
 }
 
+public enum ETATSCENARIO1 {
+  PRINCIPAL,
+  METEO,
+  DETAIL
+}
+
+// enumération pour le scénario 4
+public enum ETATS_SCENARIO_4 {
+  INTRO,
+  ASKED_FOR_METEO,
+  ASKED_FOR_METEO_DATED,
+}
+
+public enum WEATHER_DATE {
+  TODAY,
+  TOMORROW,
+  AFTER_TOMORROW,
+  NEWT_WEEK,
+  MONDAY,
+  TUESDAY,
+  WEDNESDAY,
+  THURSDAY,
+  FRIDAY,
+  SATURDAY,
+  SUNDAY,
+}
+
 // enumération pour le scénario 5
 public enum ETAT{
   INTRO,
@@ -19,18 +46,12 @@ public enum ETAT{
   END
 }
 
-public enum ETATSCENARIO1 {
-  PRINCIPAL,
-  METEO,
-  DETAIL
-}
-
 // enumération pour le scénario 7
-public enum ETATSCENARIO7{
+public enum ETATSCENARIO7 {
   INTRO,
   SCANQR,
   RECUPINFO,
-  AFFINFO, 
+  AFFINFO,
   END
 }
 
@@ -40,12 +61,11 @@ public enum ETATS_SCENARIO_8 {
   SHARE_LEFT_LOADING,
   SHARE_LEFT_LOADED,
   SHARE_RIGHT_LOADING,
-  SHARE_RIGHT_LOADED,
-  END
+  SHARE_RIGHT_LOADED
 }
 
 public enum ENTREESELCTIONNEE {
   UTILISATEUR,
-  SAUVEGARDE, 
+  SAUVEGARDE,
   NONE // quand rien est renseigné
 }

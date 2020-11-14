@@ -53,6 +53,8 @@ void setup(){
   
   chargerImagesScenario1();
 
+  chargerImagesScenario4();
+
   chargerImagesScenario8();
 }
 
@@ -151,8 +153,7 @@ void draw() {
       
       break;
     case SCENARIO4:
-      background(255,0,0);
-      text("SCENARIO 4", 25,25);
+      drawScenario4();
       
       break;
     case SCENARIO5:
@@ -216,12 +217,9 @@ void keyPressed(){
   key = 0;
 
 }
-void keyTyped(){
-  
-  switch (stateMachine) {
-    
-    // keyTypedSceneXX
 
+void keyTyped(){
+  switch (stateMachine) {
     case INITIAL:
     break;
     case PAUSE:
@@ -232,10 +230,11 @@ void keyTyped(){
       break;
     case SCENARIO3: 
       break;
-     case SCENARIO4:
+    case SCENARIO4:
+      keyTypedScene4();
       break;
     case SCENARIO5:
-     keyTypedScene5();
+      keyTypedScene5();
       break;
     case SCENARIO6:  
       break;
@@ -243,12 +242,11 @@ void keyTyped(){
       keyTypedScene5();
     break;
     case SCENARIO8:   
-     keyTypedScene8();
+      keyTypedScene8();
       break;
     default:
       break;
-   }    
-  
+  }
 }
 
 void mousePressed(){
@@ -262,6 +260,7 @@ void mousePressed(){
       } else if (overRect(950,50,350,200)) {
         stateMachine = FSM.SCENARIO3;
       } else if ((overRect(1400,50,350,200))) {
+        setup4();
         stateMachine = FSM.SCENARIO4;
       } else if (overRect(50,300,350,200)) {
         stateMachine = FSM.SCENARIO5;
@@ -270,7 +269,7 @@ void mousePressed(){
       } else if (overRect(950,300,350,200)) {
         stateMachine = FSM.SCENARIO7;
       } else if (overRect(1400,300,350,200)) {
-        reset8();
+        setup8();
         stateMachine = FSM.SCENARIO8;
       }
       break;
@@ -290,6 +289,7 @@ void mousePressed(){
     case SCENARIO3: 
       break;
      case SCENARIO4:
+      mousePressedScene4();
       break;
     case SCENARIO5:
       mousePressedScene5();
