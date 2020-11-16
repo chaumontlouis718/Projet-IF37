@@ -14,7 +14,10 @@ public enum FSM {
 public enum ETATSCENARIO1 {
   PRINCIPAL,
   METEO,
-  DETAIL
+  INFORMATION,
+  EMAIL,
+  METEO_INFORMATION,
+  METEO_EMAIL,
 }
 
 // enumération pour le scénario 4
