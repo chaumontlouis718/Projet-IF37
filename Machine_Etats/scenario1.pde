@@ -8,7 +8,7 @@ private PImage imageSoleil;
 private PImage imageSuite;
 private PImage imageEmail;
 private PImage imageCoronavirus;
-private ETATSCENARIO1 etatScenario = ETATSCENARIO1.PRINCIPAL;
+private ETATSCENARIO1 etatScenario1 = ETATSCENARIO1.PRINCIPAL;
 
 void chargerImagesScenario1() {
   imageUtilisateur = loadImage("ressources/icone_utilisateur.png");
@@ -30,7 +30,7 @@ void drawScenario1() {
   drawPartieMeteo(0, 40);
   drawPartieInformations(0, 200);
   drawPartieEmails(0, 420);
-  switch (etatScenario) {
+  switch (etatScenario1) {
     case METEO:
       drawPartieMeteoComplet(750, 20);
       break;
@@ -52,27 +52,27 @@ void drawScenario1() {
 
 void mousePressedScene1() {
   if (overRect(640, 90, 32, 32)) { // météo
-    if (etatScenario == ETATSCENARIO1.INFORMATION)
-      etatScenario = ETATSCENARIO1.METEO_INFORMATION;
-    else if (etatScenario == ETATSCENARIO1.EMAIL)
-      etatScenario = ETATSCENARIO1.METEO_EMAIL;
+    if (etatScenario1 == ETATSCENARIO1.INFORMATION)
+      etatScenario1 = ETATSCENARIO1.METEO_INFORMATION;
+    else if (etatScenario1 == ETATSCENARIO1.EMAIL)
+      etatScenario1 = ETATSCENARIO1.METEO_EMAIL;
     else
-      etatScenario = ETATSCENARIO1.METEO;
+      etatScenario1 = ETATSCENARIO1.METEO;
   }
   else if (overRect(10, 230, 570, 170)) { // information
-    if (etatScenario == ETATSCENARIO1.METEO || etatScenario == ETATSCENARIO1.METEO_EMAIL)
-      etatScenario = ETATSCENARIO1.METEO_INFORMATION;
+    if (etatScenario1 == ETATSCENARIO1.METEO || etatScenario1 == ETATSCENARIO1.METEO_EMAIL)
+      etatScenario1 = ETATSCENARIO1.METEO_INFORMATION;
     else
-      etatScenario = ETATSCENARIO1.INFORMATION;
+      etatScenario1 = ETATSCENARIO1.INFORMATION;
   }
   else if (overRect(10, 460, 630, 160)) { // email
-    if (etatScenario == ETATSCENARIO1.METEO || etatScenario == ETATSCENARIO1.METEO_INFORMATION)
-      etatScenario = ETATSCENARIO1.METEO_EMAIL;
+    if (etatScenario1 == ETATSCENARIO1.METEO || etatScenario1 == ETATSCENARIO1.METEO_INFORMATION)
+      etatScenario1 = ETATSCENARIO1.METEO_EMAIL;
     else
-      etatScenario = ETATSCENARIO1.EMAIL;
+      etatScenario1 = ETATSCENARIO1.EMAIL;
   }
   else {
-    etatScenario = ETATSCENARIO1.PRINCIPAL;
+    etatScenario1 = ETATSCENARIO1.PRINCIPAL;
   }
 }
 
@@ -104,7 +104,7 @@ private void drawPartieMeteo(int origineX, int origineY) {
 
 private void drawPartieMeteoComplet(int origineX, int origineY) {
   fill(230);
-  rect(origineX, origineY, 910, 200);
+  rect(origineX, origineY, 910, 200, 5);
   
   fill(0);
   textAlign(LEFT);
@@ -155,7 +155,7 @@ private void drawPartieInformations(int origineX, int origineY) {
 
 private void drawPartieDetailInformations(int origineX, int origineY) {
   fill(230);
-  rect(origineX, origineY, 910, 600);
+  rect(origineX, origineY, 910, 600, 5);
   
   fill(0);
   textAlign(CENTER);
@@ -192,7 +192,7 @@ private void drawPartieEmails(int origineX, int origineY) {
 
 private void drawPartieDetailEmails(int origineX, int origineY) {
   fill(230);
-  rect(origineX, origineY, 910, 600);
+  rect(origineX, origineY, 910, 600, 5);
   
   fill(0);
   textAlign(CENTER);

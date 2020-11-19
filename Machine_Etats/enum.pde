@@ -20,6 +20,11 @@ public enum ETATSCENARIO1 {
   METEO_EMAIL,
 }
 
+public enum ETATSCENARIO3 {
+  PRINCIPAL,
+  NOTIFICATION
+}
+
 // enumération pour le scénario 4
 public enum ETATS_SCENARIO_4 {
   INTRO,

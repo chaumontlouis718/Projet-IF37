@@ -62,6 +62,7 @@ void setup(){
   redimmensionner = loadImage("ressources/fleches.png");
   
   chargerImagesScenario1();
+  chargerImagesScenario3();
 
   chargerImagesScenario4();
 
@@ -158,9 +159,7 @@ void draw() {
       
       break;
     case SCENARIO3:
-      background(255,0,0);
-      text("SCENARIO 3", 25,25);
-      
+      drawScenario3();
       break;
     case SCENARIO4:
       drawScenario4();
@@ -340,7 +339,8 @@ void mousePressed(){
       break;
     case SCENARIO2: 
       break;
-    case SCENARIO3: 
+    case SCENARIO3:
+      mousePressedScene3();
       break;
      case SCENARIO4:
       mousePressedScene4();
