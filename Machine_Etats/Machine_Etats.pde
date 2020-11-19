@@ -4,11 +4,13 @@ Capture cam;
 FSM stateMachine;
 FSM holdingStatePause;
 
-// Variable globale scénario 2
+// Variable globale scénario 2,6
 float xCarte1,yCarte1,xCarte2,yCarte2,xCarte3,yCarte3,
       xBloc1,yBloc1,xBloc2,yBloc2,xBloc3,yBloc3,
-      xBloc1Dest,yBloc1Dest,xBloc2Dest,yBloc2Dest,xBloc3Dest,yBloc3Dest;
+      xBloc1Dest,yBloc1Dest,xBloc2Dest,yBloc2Dest,xBloc3Dest,yBloc3Dest,
+      xFichier, yFichier,widthFichier, heightFichier;
 int draggingCard = 0,holdingCard1=0,holdingCard2=0;
+PImage redimmensionner;
 String messageScenario2 = "Scénario 2 : Interagir avec des supports physique types cartes à jouer \n"+
 "1.L'utilisateur choisit une carte dans un tas disposées sur la table \n"+
 "2.Il la pose sur la table à un emplacement prévu à cet effet délimité par l'interface de l'application \n"+
@@ -29,13 +31,19 @@ void setup(){
   stroke(255);
   noFill();
  
-  // Variable globale scénario 2
+  // Variable globale scénario 2,6
   xCarte1 = width/4;
   yCarte1 = (height/2)+70;
   xCarte2 = width/4 + 90;
   yCarte2 = (height/2)+70;
   xCarte3 = width/4 + 180;
   yCarte3 = (height/2)+70;
+  
+  xFichier = width/4;
+  yFichier = (height/2)+70;
+  
+  widthFichier = 140;
+  heightFichier = 227;
   
   xBloc1Dest = 75;
   yBloc1Dest = -(height/2);
@@ -50,6 +58,8 @@ void setup(){
   yBloc2 = yBloc2Dest;
   xBloc3 = xBloc3Dest;
   yBloc3 = yBloc3Dest;
+  
+  redimmensionner = loadImage("ressources/fleches.png");
   
   chargerImagesScenario1();
 
@@ -162,8 +172,52 @@ void draw() {
       
       break;
     case SCENARIO6:
-      background(255,0,0);
+      background(255);
+      fill(0);
+      textAlign(LEFT);
       text("SCENARIO 6", 25,25);
+      
+      // Séparation écran
+      stroke(0);
+      line(width/2,0,width/2,height);
+      line(0,height/2,width/2,height/2);
+      
+      //Table
+      fill(150);
+      rect(50,(height/2)+50,(width/2)-100,(height/2)-100,20);
+      
+      fill(255);
+      stroke(255,0,0);
+      strokeWeight(3);
+      rect(70,height-220,200,150,20);
+      
+      //Ecran mural
+      fill(220);
+      stroke(0,200,50);
+      rect(50,50,(width/2)-100,(height/2)-100,5);
+      fill(0);
+      noStroke();
+      rect((width/4)-40,(height/2)-50,80,50);
+      
+      // Fichier
+      fill(255);
+      stroke(0);
+      
+      if (yFichier >= (height/2)+50 && yFichier <= height-50-heightFichier) {
+        rect(xFichier,yFichier, widthFichier,heightFichier);
+        image(redimmensionner, xFichier+widthFichier-15,yFichier+heightFichier-15,15,15);
+      } else if (yFichier >= 150 && yFichier <= (height/2)+50-heightFichier) {
+        rect(xFichier,yFichier-100, widthFichier,heightFichier);
+        image(redimmensionner, xFichier+widthFichier-15,yFichier+heightFichier-115,15,15);
+      } else if (yFichier >= (height/2)-50-heightFichier && yFichier <= (height/2)+50) {
+        rect(xFichier,yFichier-100,widthFichier,(height/2)+50-yFichier);
+        rect(xFichier,(height/2)+50,widthFichier,heightFichier-((height/2)+50-yFichier));
+        image(redimmensionner, xFichier+widthFichier-15,yFichier+heightFichier-15,15,15);
+      } else if (yFichier<=150) {
+        rect(xFichier,50,widthFichier,heightFichier+yFichier-150);
+      } else if (yFichier>=height-50-heightFichier) {
+        rect(xFichier,yFichier,widthFichier,height-50-yFichier);
+      }
       
       break;
     case SCENARIO7:
@@ -395,8 +449,6 @@ void mouseReleased() {
         }
         
       }
-      
-      println(holdingCard1+" / "+holdingCard2);
       draggingCard = 0;
       break;
     default:
@@ -419,6 +471,20 @@ void mouseDragged() {
         draggingCard = 3;
         xCarte3 = mouseX - 35;
         yCarte3 = mouseY - 60;
+      }
+      break;
+    
+    case SCENARIO6:
+      if (mouseX >= xFichier && mouseX <= xFichier+widthFichier-15 && mouseY >= yFichier && mouseY <= yFichier+heightFichier-15) {
+        draggingCard = 1;
+        xFichier = mouseX -widthFichier/2;
+        yFichier = mouseY - heightFichier/2;
+      } else if (mouseX >= xFichier+widthFichier-15 && mouseX <= xFichier+widthFichier && mouseY >= yFichier+heightFichier-15 && mouseY <= yFichier+heightFichier) {
+        widthFichier = mouseX - xFichier+5;
+        heightFichier = mouseY - yFichier+5;
+      } else if (mouseX >= xFichier+widthFichier-15 && mouseX <= xFichier+widthFichier && mouseY >= yFichier+heightFichier-115 && mouseY <= yFichier+heightFichier-100) {
+        widthFichier = mouseX - xFichier+5;
+        heightFichier = mouseY - yFichier+5;
       }
       break;
     default:
