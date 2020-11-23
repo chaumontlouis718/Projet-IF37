@@ -25,33 +25,41 @@ void chargerImagesScenario1() {
 
 void drawScenario1() {
   background(220);
+  
+  stroke(0);
+  strokeWeight(3);
+  
+  fill(150);
+  rect(30, 50, width-175, height-100, 20);
   fill(0);
-  drawPartieUtilisateur(0, 0);
-  drawPartieMeteo(0, 40);
-  drawPartieInformations(0, 200);
-  drawPartieEmails(0, 420);
+  stroke(255);
+  
+  drawPartieUtilisateur(40, 60);
+  drawPartieMeteo(40, 100);
+  drawPartieInformations(40, 240);
+  drawPartieEmails(40, 460);
   switch (etatScenario1) {
     case METEO:
-      drawPartieMeteoComplet(750, 20);
+      drawPartieMeteoComplet(730, 60);
       break;
     case INFORMATION:
-      drawPartieDetailInformations(750, 20);
+      drawPartieDetailInformations(730, 60);
       break;
     case EMAIL:
-      drawPartieDetailEmails(750, 20);
+      drawPartieDetailEmails(730, 60);
       break;
     case METEO_INFORMATION:
-      drawPartieMeteoComplet(750, 20);
-      drawPartieDetailInformations(750, 230);
+      drawPartieMeteoComplet(730, 60);
+      drawPartieDetailInformations(730, 270);
       break;
     case METEO_EMAIL:
-      drawPartieMeteoComplet(750, 20);
-      drawPartieDetailEmails(750, 230);
+      drawPartieMeteoComplet(730, 60);
+      drawPartieDetailEmails(730, 270);
   }
 }
 
 void mousePressedScene1() {
-  if (overRect(640, 90, 32, 32)) { // météo
+  if (overRect(680, 150, 32, 32)) { // météo
     if (etatScenario1 == ETATSCENARIO1.INFORMATION)
       etatScenario1 = ETATSCENARIO1.METEO_INFORMATION;
     else if (etatScenario1 == ETATSCENARIO1.EMAIL)
@@ -59,13 +67,13 @@ void mousePressedScene1() {
     else
       etatScenario1 = ETATSCENARIO1.METEO;
   }
-  else if (overRect(10, 230, 570, 170)) { // information
+  else if (overRect(50, 290, 570, 170)) { // information
     if (etatScenario1 == ETATSCENARIO1.METEO || etatScenario1 == ETATSCENARIO1.METEO_EMAIL)
       etatScenario1 = ETATSCENARIO1.METEO_INFORMATION;
     else
       etatScenario1 = ETATSCENARIO1.INFORMATION;
   }
-  else if (overRect(10, 460, 630, 160)) { // email
+  else if (overRect(50, 520, 630, 160)) { // email
     if (etatScenario1 == ETATSCENARIO1.METEO || etatScenario1 == ETATSCENARIO1.METEO_INFORMATION)
       etatScenario1 = ETATSCENARIO1.METEO_EMAIL;
     else
@@ -155,7 +163,7 @@ private void drawPartieInformations(int origineX, int origineY) {
 
 private void drawPartieDetailInformations(int origineX, int origineY) {
   fill(230);
-  rect(origineX, origineY, 910, 600, 5);
+  rect(origineX, origineY, 910, 520, 5);
   
   fill(0);
   textAlign(CENTER);
@@ -164,9 +172,9 @@ private void drawPartieDetailInformations(int origineX, int origineY) {
   
   textAlign(LEFT);
   textSize(19);
-  text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper elit sapien, id\nmalesuada ex ultrices eget. Etiam ut arcu a elit molestie dignissim. Proin velultricies nisl. Sed\nauctor feugiat sapien, ac luctus sapien condimentum ac. Fusce quis accumsan ligula. \nDonec in nisi nec massa efficitur condimentum. Nullam nec lacus vel ipsum vestibulum porta\na vitae neque. Duis at rhoncus sem. Donec eget elementum erat, posuere consectetur lorem.", origineX+20, origineY+80);
-  image(imageCoronavirus, origineX+230, origineY+240, 460, 240);
-  text("Donec nisi ligula, consequat sit amet erat vitae, accumsan elementum arcu. Mauris ac felis ut\nmi laoreet varius. Sed feugiat pharetra nisl et bibendum.", origineX+20, origineY+520);
+  text("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam ullamcorper elit sapien, id\nmalesuada ex ultrices eget. Etiam ut arcu a elit molestie dignissim. Proin velultricies nisl. Sed\nauctor feugiat sapien, ac luctus sapien condimentum ac. Fusce quis accumsan ligula. \nDonec in nisi nec massa efficitur condimentum.", origineX+20, origineY+80);
+  image(imageCoronavirus, origineX+230, origineY+220, 460, 210);
+  text("Donec nisi ligula, consequat sit amet erat vitae, accumsan elementum arcu. Mauris ac felis ut\nmi laoreet varius. Sed feugiat pharetra nisl et bibendum.", origineX+20, origineY+470);
 }
 
 private void drawPartieEmails(int origineX, int origineY) {
@@ -192,7 +200,7 @@ private void drawPartieEmails(int origineX, int origineY) {
 
 private void drawPartieDetailEmails(int origineX, int origineY) {
   fill(230);
-  rect(origineX, origineY, 910, 600, 5);
+  rect(origineX, origineY, 910, 510, 5);
   
   fill(0);
   textAlign(CENTER);
@@ -206,5 +214,5 @@ private void drawPartieDetailEmails(int origineX, int origineY) {
   line(origineX+20, origineY+140, origineX+880, origineY+140);
   stroke(255);
   
-  text("Bonjour,\n\nJe me permets de vous proposer aujourd’hui ma candidature au poste de XXX. Les\ncompétences en XXX, acquises lors de mon diplôme XXX correspondent au descriptif de votre\noffre. En effet, vous indiquez avoir besoin d’une personne maîtrisant XXX, une technique que\nj’ai longuement étudiée lors du module XXX. Mon expérience professionnelle n’est peut être\npas la plus importante. Mais durant mes 7 mois en entreprise, j’ai été amené à exploiter les\ntechniques susnommées avec succès. Cette expérience m’a en outre permis de développer ma\nrigueur, et mon esprit d’équipe. Le projet m’ayant été confié nécessitant de s’entendre\nà plusieurset ayant des enjeux importants pour l’entreprise. J’ai adoré partager, adapter mes\nméthodes pour mener à bien le projet en toute sérénité.\n\nJean Dupond", origineX+20, origineY+180);
+  text("Bonjour,\n\nJe me permets de vous proposer aujourd’hui ma candidature au poste de XXX. Les\ncompétences en XXX, acquises lors de mon diplôme XXX correspondent au descriptif de votre\noffre. En effet, vous indiquez avoir besoin d’une personne maîtrisant XXX, une technique que\nj’ai longuement étudiée lors du module XXX. Mon expérience professionnelle n’est peut être\npas la plus importante. Mais durant mes 7 mois en entreprise, j’ai été amené à exploiter les\ntechniques susnommées avec succès. Cette expérience m’a en outre permis de développer ma\nrigueur, et mon esprit d’équipe.\n\nJean Dupond", origineX+20, origineY+180);
 }
